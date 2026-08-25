@@ -124,6 +124,7 @@ function StatsPage() {
                       industry={block.entry.movie.industry}
                       year={block.entry.movie.release_year}
                       posterUrl={block.entry.movie.poster_url}
+                      compact
                     />
                   </div>
                   <div className="min-w-0">
