@@ -97,7 +97,7 @@ function MovieDetail() {
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
                   className="display text-[clamp(3.5rem,12vw,7rem)] leading-none industry-text"
                 >
-                  {movie.vote_count ? movie.avg_score.toFixed(1) : "—"}
+                  {movie.vote_count ? movie.avg_score.toFixed(1) : "NR"}
                 </motion.p>
                 <p className="text-xs uppercase tracking-widest text-muted-foreground">
                   {movie.vote_count} {movie.vote_count === 1 ? "rating" : "ratings"}
