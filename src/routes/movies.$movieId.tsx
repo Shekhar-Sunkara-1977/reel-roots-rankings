@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { fetchCredits, fetchMovie, fetchReviews } from "@/lib/data";
 import { PosterArt } from "@/components/PosterArt";
+import { PersonCard } from "@/components/PersonCard";
 import { RatePanel } from "@/components/RatePanel";
 import { ReviewList } from "@/components/ReviewList";
 import { useAuth } from "@/hooks/useAuth";
@@ -122,16 +123,13 @@ function MovieDetail() {
             g.people.length ? (
               <section key={g.role}>
                 <h2 className="display text-2xl">{ROLE_LABEL[g.role]}</h2>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                   {g.people.map((c) => (
-                    <Link
+                    <PersonCard
                       key={`${c.person.id}-${c.role_on_film}`}
-                      to="/people/$personId"
-                      params={{ personId: c.person.id }}
-                      className="rounded-full border border-border bg-surface/60 px-4 py-2 text-sm transition-colors hover:border-industry"
-                    >
-                      {c.person.name}
-                    </Link>
+                      person={c.person}
+                      subtitle={c.character_name ?? undefined}
+                    />
                   ))}
                 </div>
               </section>

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { fetchMovies, fetchPeopleRankings } from "@/lib/data";
 import { DECADES, GENRES, INDUSTRIES, type Industry } from "@/lib/industry";
 import { PosterArt } from "@/components/PosterArt";
+import { PersonArt } from "@/components/PersonCard";
 
 export const Route = createFileRoute("/rankings")({
   head: () => ({
@@ -163,9 +164,12 @@ function Rankings() {
                   <Link
                     to="/people/$personId"
                     params={{ personId: p.person.id }}
-                    className="flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-4 transition-colors hover:border-industry"
+                    className="flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-3 transition-colors hover:border-industry"
                   >
                     <span className="display w-12 shrink-0 text-right text-4xl text-muted-foreground">{i + 1}</span>
+                    <div className="h-16 w-12 shrink-0 overflow-hidden rounded-md">
+                      <PersonArt name={p.person.name} photoUrl={p.person.photo_url} />
+                    </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-semibold">{p.person.name}</p>
                       <p className="text-xs text-muted-foreground">

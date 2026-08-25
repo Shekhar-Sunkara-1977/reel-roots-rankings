@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import { fetchMovies, searchPeople } from "@/lib/data";
 import { MovieCard } from "@/components/MovieCard";
+import { PersonCard } from "@/components/PersonCard";
 import { DECADES, GENRES, INDUSTRIES, type Industry } from "@/lib/industry";
 
 type BrowseSearch = {
@@ -167,17 +167,9 @@ function Browse() {
       {people.length ? (
         <section className="mt-8">
           <h2 className="display text-2xl">People</h2>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             {people.map((p) => (
-              <Link
-                key={p.id}
-                to="/people/$personId"
-                params={{ personId: p.id }}
-                className="rounded-full border border-border px-4 py-2 text-sm hover:border-industry"
-              >
-                {p.name}
-                <span className="ml-2 text-xs text-muted-foreground">{p.bio}</span>
-              </Link>
+              <PersonCard key={p.id} person={p} subtitle={p.bio ?? undefined} />
             ))}
           </div>
         </section>
