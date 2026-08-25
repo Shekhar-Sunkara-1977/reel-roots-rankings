@@ -137,6 +137,7 @@ function Rankings() {
                         industry={m.industry}
                         year={m.release_year}
                         posterUrl={m.poster_url}
+                        compact
                       />
                     </div>
                     <div className="min-w-0 flex-1">
