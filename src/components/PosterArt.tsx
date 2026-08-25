@@ -41,16 +41,14 @@ export function PosterArt({ title, industry, year, posterUrl, className = "" }: 
             "repeating-linear-gradient(115deg, transparent 0 14px, color-mix(in oklab, var(--industry) 40%, transparent) 14px 15px)",
         }}
       />
-      <span className="deva relative text-xs tracking-widest text-industry-foreground/70">
+      <span className="deva relative text-xs tracking-widest text-foreground/70">
         {INDUSTRY_SCRIPT[industry]}
       </span>
       <div className="relative">
-        <h3 className="display text-2xl leading-[0.9] text-industry-foreground drop-shadow-sm sm:text-3xl">
+        <h3 className="display text-2xl leading-[0.9] text-foreground drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] sm:text-3xl">
           {title}
         </h3>
-        {year ? (
-          <span className="display mt-1 block text-sm text-industry-foreground/70">{year}</span>
-        ) : null}
+        {year ? <span className="display mt-1 block text-sm text-foreground/65">{year}</span> : null}
       </div>
     </div>
   );

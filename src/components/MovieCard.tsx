@@ -27,7 +27,7 @@ export function MovieCard({ movie, rank }: { movie: MovieWithStats; rank?: numbe
             posterUrl={movie.poster_url}
           />
           {rank ? (
-            <span className="display absolute -bottom-2 left-2 text-6xl text-foreground/85 mix-blend-overlay">
+            <span className="display absolute -bottom-1 left-2 text-6xl text-foreground drop-shadow-[0_3px_14px_rgba(0,0,0,0.8)]">
               {rank}
             </span>
           ) : null}

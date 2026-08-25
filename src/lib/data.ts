@@ -111,17 +111,32 @@ export type Review = {
 export async function fetchReviews(movieId: string): Promise<Review[]> {
   const { data, error } = await supabase
     .from("ratings")
-    .select("id,user_id,score,review_text,created_at,profiles(username,avatar_url)")
+    .select("id,user_id,score,review_text,created_at")
     .eq("movie_id", movieId)
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return (data ?? []).map((r) => ({
+  const rows = data ?? [];
+  if (!rows.length) return [];
+
+  // ratings.user_id points at auth.users, so author profiles are fetched separately.
+  const { data: profiles } = await supabase
+    .from("profiles")
+    .select("id,username,avatar_url")
+    .in("id", rows.map((r) => r.user_id as string));
+  const map = new Map(
+    (profiles ?? []).map((p) => [
+      p.id as string,
+      { username: p.username as string, avatar_url: p.avatar_url as string | null },
+    ]),
+  );
+
+  return rows.map((r) => ({
     id: r.id as string,
     user_id: r.user_id as string,
     score: r.score as number,
     review_text: r.review_text as string | null,
     created_at: r.created_at as string,
-    profile: (r.profiles as unknown as Review["profile"]) ?? null,
+    profile: map.get(r.user_id as string) ?? null,
   }));
 }
 
